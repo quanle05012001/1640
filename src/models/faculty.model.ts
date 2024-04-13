@@ -3,7 +3,7 @@ import { roles } from "../utils";
 
 interface IFaculty {
     name: string;
-    marketing_coordinator_id: string;
+    marketing_coordinator_id: Schema.Types.ObjectId;
 }
 
 const FacultySchema = new Schema<IFaculty>({
@@ -13,9 +13,8 @@ const FacultySchema = new Schema<IFaculty>({
         unique: true,
     },
     marketing_coordinator_id: {
-        type: String,
-        required: true,
-        trim: true,
+        type: Schema.Types.ObjectId,
+        ref: 'User' // Tham chiếu tới mô hình Parent
     }
 }, {
     timestamps: true,

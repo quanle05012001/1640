@@ -16,7 +16,7 @@ export const create = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
     
     
@@ -30,7 +30,7 @@ export const findAll = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 
@@ -46,7 +46,7 @@ export const findOne = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 
@@ -63,7 +63,7 @@ export const update = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 
@@ -80,7 +80,7 @@ export const remove = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 
@@ -95,7 +95,7 @@ export const createComment = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
     
     

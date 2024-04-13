@@ -17,7 +17,7 @@ export const createFaculty = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error  });
     }
     
     
@@ -31,7 +31,7 @@ export const getAllFaculty = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error});
     }
 };
 
@@ -47,7 +47,7 @@ export const getFacultyById = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 
@@ -65,7 +65,7 @@ export const editFaculty = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 
@@ -81,7 +81,7 @@ export const deleteFaculty = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 

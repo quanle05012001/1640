@@ -3,7 +3,7 @@ import { user } from './user.route';
 import { article } from './article.route';
 import { faculty } from './faculty.route';
 import { schoolYear } from './school-year.route';
-import { entries } from './entries.route';
+import { entry } from './entry.route';
 import { comment } from './comment.route';
 // import { UserMiddleware } from '../middlewares';
 
@@ -20,7 +20,7 @@ routes.use('/api/user', user);
 routes.use('/api/article', article);
 routes.use('/api/faculty', faculty);
 routes.use('/api/school-year', schoolYear);
-routes.use('/api/entries', entries);
+routes.use('/api/entry', entry);
 routes.use('/api/comment', comment);
 
 

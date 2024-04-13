@@ -17,7 +17,7 @@ export const createSchoolYear = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
     
     
@@ -31,7 +31,7 @@ export const getAllSchoolYear = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 
@@ -47,7 +47,7 @@ export const getSchoolYearById = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 
@@ -65,7 +65,7 @@ export const editSchoolYear = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 
@@ -81,7 +81,7 @@ export const deleteSchoolYear = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 }
 

@@ -33,7 +33,7 @@ export const signup = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 
@@ -73,7 +73,7 @@ export const login = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 
@@ -104,7 +104,7 @@ export const getById = async (req: Request, res: Response) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 
@@ -119,7 +119,7 @@ export const getAll = async (req: Request, res: Response) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 }
 
@@ -139,7 +139,7 @@ export const deleteUser = async (req: Request, res: Response) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 }
 
@@ -188,7 +188,7 @@ export const editUser = async (req: Request, res: Response) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 }
 
@@ -201,7 +201,7 @@ export const logout = async (req: Request, res: Response) => {
         res.status(200).json({ error: false, message: 'User logged out successfully' });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 
@@ -230,7 +230,7 @@ export const changePassword = async (req: Request, res: Response) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
     
 }
@@ -264,7 +264,7 @@ export const refresh = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: true, message: 'Internal Server Error' });
+        res.status(500).json({ error: true, message: 'Internal Server Error', info : error });
     }
 };
 

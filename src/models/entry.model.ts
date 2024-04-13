@@ -1,19 +1,18 @@
 import { Schema, model } from "mongoose";
 import { roles } from "../utils";
 
-interface IEntries {
+interface IEntry {
     name: string;
     dateline1: Date;
     dateline2: Date;
-    faculty_id: string;
+    faculty_id: Schema.Types.ObjectId;
     
 }
 
-const IEntriesSchema = new Schema<IEntries>({
+const IEntrySchema = new Schema<IEntry>({
     name: {
         type: String,
         required: true,
-        unique: true,
     },
     dateline1: {
         type: Date,
@@ -24,13 +23,14 @@ const IEntriesSchema = new Schema<IEntries>({
         required: true,
     },
     faculty_id: {
-        type: String,
-        required: true,
-        trim: true,
+       type: Schema.Types.ObjectId,
+       ref: 'Faculty',
+       required: true,
+       trim: true,
     }
    
 }, {
     timestamps: true,
 });
 
-export const Entries = model<IEntries>('Entries', IEntriesSchema);
+export const Entry = model<IEntry>('Entry', IEntrySchema);
