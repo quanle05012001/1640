@@ -23,7 +23,6 @@ const ArticleSchema = new Schema<IArticle>({
     },
     images: {
         type: [String],
-        required: true,
     },
     entry_id: {
         type: Schema.Types.ObjectId,
@@ -37,12 +36,12 @@ const ArticleSchema = new Schema<IArticle>({
         required: true,
         trim: true,
     },
-    faculty_id: {
-        type: Schema.Types.ObjectId,
-        ref: 'Faculty',
-        required: true,
-        trim: true,
-    },
+    // faculty_id: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Faculty',
+    //     required: true,
+    //     trim: true,
+    // },
     school_year_id: {
         type: Schema.Types.ObjectId,
         ref: 'SchoolYear',

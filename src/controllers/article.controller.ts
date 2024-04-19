@@ -6,7 +6,10 @@ import type { Request, Response } from 'express';
 import { getTokenInfo } from '../utils';
 import { article } from '../routes/article.route';
 import multer, { Multer } from 'multer';
-import path from 'path';
+import { sendEmailCreatedArticle, sendEmailUpdateArticle } from '../services/email.service';
+import { User } from '../models/user.model';
+
+
 // model article : files: {
 //     type: [String],
 //     required: true,
@@ -39,30 +42,40 @@ import path from 'path';
 
 export const create = async (req: Request, res: Response) => {
     try {
-        const { body } = req;
-        const article = new Article(req.body);
-        const newArticle = await Article.create(article);
-        const { wordFiles, imageFiles } = req.files as { [key: string]: Express.Multer.File[] };
-
+       
+        // const 
+        // const article = new Article(req.body);
+        // const newArticle = await Article.create(article);
+        const { files, images } = await req.files as { [key: string]: Express.Multer.File[] };
+        
         // Lưu tên file Word vào MongoDB
-        const wordFileModels = await Promise.all(wordFiles?.map(async (file) => {
-          const fileModel = new Article({
-            fileName: file.filename,
-            fileType: 'word',
-          });
-          return await fileModel.save();
-        }) || []);
-    
-        // Lưu tên file ảnh vào MongoDB
-        const imageFileModels = await Promise.all(imageFiles?.map(async (file) => {
-          const fileModel = new Article({
-            fileName: file.filename,
-            fileType: 'image',
-          });
-          return await fileModel.save();
-        }) || []);
-        return res.status(201).json({
-            error: false, message: 'Article created successfully', data: newArticle
+        const { body } = req;
+        const student_id = body.student_id;
+        const studentInfo = await User.findOne({
+            _id: student_id
+        });
+
+        const facultyInfo = await User.findOne({
+            _id: studentInfo?.faculty_id
+        });
+        const marketingCoordinator = await User.findOne({
+            role: roles.marketingCoordinator,
+            faculty_id: facultyInfo?.faculty_id
+        });
+         const newArticle = await Article.create({
+            ...req.body,
+            files: await files.map((file) => file.filename),
+            images: await images.map((image) => image.filename),
+        });
+        const data = {
+            name: studentInfo!.name,
+            email: marketingCoordinator!.email,
+            // url : `http://localhost:3000/article/${newArticle._id}`
+        }
+        await sendEmailCreatedArticle(data);
+
+        return res.status(200).json({
+            error: false, message: 'Article created', data: newArticle
         });
     } catch (error) {
         console.log(error);
@@ -100,16 +113,46 @@ export const findOne = async (req: Request, res: Response) => {
     }
 };
 
-
+//update tính lại, condinron
 export const update = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         const { body } = req;
+        
+        const { files, images } = await req.files as { [key: string]: Express.Multer.File[] };
+        
+        const student_id = body.student_id;
+        const studentInfo = await User.findOne({
+            _id: student_id
+        });
+
+        const facultyInfo = await User.findOne({
+            _id: studentInfo?.faculty_id
+        });
+        const marketingCoordinator = await User.findOne({
+            role: roles.marketingCoordinator,
+            faculty_id: facultyInfo?.faculty_id
+        });
+        //  const newArticle = await Article.create({
+        //     ...req.body,
+        //     files: await files.map((file) => file.filename),
+        //     images: await images.map((image) => image.filename),
+        // });
+
         const article = await Article.findByIdAndUpdate
-            (id, body, { new: true });
-        if (!article) {
-            return res.status(404).json({ error: true, message: 'Article not found' });
+            (id, {
+                ...body,
+                files: await files.map((file) => file.filename),
+                images: await images.map((image) => image.filename),
+            
+            }, { new: true });
+      
+        const data = {
+            name: studentInfo!.name,
+            email: marketingCoordinator!.email,
+            // url : `http://localhost:3000/article/${newArticle._id}`
         }
+        await sendEmailUpdateArticle(data);
         return res.status(200).json({
             error: false, message: 'Article updated', data: article
         });

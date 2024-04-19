@@ -27,7 +27,7 @@ export const signup = async (req: Request, res: Response) => {
             error: false, message: 'User created successfully', user: {
                 username: new_user.username,
                 email: new_user.email,
-                roles: new_user.roles,
+                role: new_user.role,
                 _id: new_user._id,
             }
         });
@@ -67,7 +67,7 @@ export const login = async (req: Request, res: Response) => {
             user: {
                 username: user.username,
                 email: user.email,
-                roles: user.roles,
+                role: user.role,
                 _id: user._id,
             },
         });

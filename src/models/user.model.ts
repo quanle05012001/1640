@@ -5,8 +5,10 @@ interface IUser {
     username: string;
     password: string;
     email: string;
-    roles: Array<string>;
+    role: string;
     words: Array<any>;
+    name: string;
+    faculty_id: Schema.Types.ObjectId;
 }
 
 const UserSchema = new Schema<IUser>({
@@ -26,10 +28,21 @@ const UserSchema = new Schema<IUser>({
         unique: true,
         trim: true,
     },
-    roles: {
-        type: [String],
-        enum: [roles.guest, roles.student, roles.marketingCoordinator, roles.admin, roles.marketingManager],
-        default: [roles.student],
+    faculty_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Faculty',
+        required: true,
+        trim: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    },
+    role: {
+        type: String,
+        required: true,
+        enum: Object.values(roles),
+        
     },
 }, {
     timestamps: true,
